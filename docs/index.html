@@ -17,9 +17,20 @@
 <body>
     <iframe id="nicoplayer"></iframe>
     <script>
+        const bc = new BroadcastChannel('popup_nicoplayer');
+        bc.onMessage = evt => {
+            nicoplayer.contentWindow.postMessage(evt.data);
+        };
+
         const url = new URL(location.href);
         const vid = url.searchParams.get('vid');
         nicoplayer.src = `https://embed.nicovideo.jp/watch/${vid}?jsapi=1`;
+
+        window.addEventListener('message', evt => {
+            if (evt.origin === 'http://embed.nicovideo.jp') {
+                bc.postMessage(evt.data);
+            }
+        });
     </script>
 </body>
 
