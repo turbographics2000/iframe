@@ -27,9 +27,13 @@
         nicoplayer.src = `https://embed.nicovideo.jp/watch/${vid}?jsapi=1`;
 
         window.addEventListener('message', evt => {
-            if (evt.origin === 'https://embed.nicovideo.jp') {
+            /*if (evt.origin === 'https://embed.nicovideo.jp') {
                 bc.postMessage(evt.data);
-            }
+            }*/
+            window.postMessage({
+                sourceConnectorType: 1,
+                eventName: 'play'
+            }, 'https://embed.nicovideo.jp');
         });
     </script>
 </body>
