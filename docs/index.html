@@ -18,7 +18,7 @@
     <iframe id="nicoplayer"></iframe>
     <script>
         const bc = new BroadcastChannel('popup_nicoplayer');
-        bc.onMessage = evt => {
+        bc.onmessage = evt => {
             nicoplayer.contentWindow.postMessage(evt.data);
         };
 
